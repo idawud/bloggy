@@ -11,9 +11,9 @@ public class MainVerticle extends AbstractVerticle {
 
 	@Override
 	public void start(Promise<Void> startPromise) throws Exception {
-		vertx.createHttpServer().requestHandler(req -> {
-			req.response().putHeader("content-type", "text/plain").end("Hello from Vert.x!");
-		}).listen(HTTP_PORT, http -> {
+		vertx.createHttpServer().requestHandler(req -> req.response()
+			.putHeader("content-type", "text/plain")
+			.end("Hello from Vert.x!")).listen(HTTP_PORT, http -> {
 			if (http.succeeded()) {
 				startPromise.complete();
 				log.info("HTTP server started on port {}", HTTP_PORT);
